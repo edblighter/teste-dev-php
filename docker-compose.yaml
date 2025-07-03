@@ -1,0 +1,50 @@
+# Author: Felipe Prestes <mail.ffpl@gmail.com>]
+
+services:
+  app:
+    extends:
+      file: $PWD/services/php/docker-compose.yml
+      service: app
+    depends_on:
+      - db
+      - redis
+  web:
+    extends:
+      file: $PWD/services/caddy/docker-compose.yml
+      service: web
+    depends_on:
+      - app
+  db:
+    extends:
+      file: $PWD/services/postgres/docker-compose.yml
+      service: db
+  dbadmin:
+    extends:
+      file: $PWD/services/postgres/docker-compose.yml
+      service: dbadmin
+    depends_on:
+      - db
+  redis:
+    extends:
+      file: $PWD/services/redis/docker-compose.yml
+      service: redis
+volumes:
+  cache:
+    name: redis_cache
+    driver: local
+  app_volume:
+    name: app_volume
+    driver_opts:
+      type: none
+      o: bind
+      device: $PWD/app
+networks:
+  app_network:
+    name: ${APP_NETWORK_NAME:-app_network}
+    driver: bridge
+    attachable: true
+    enable_ipv4: true
+    enable_ipv6: false
+secrets:
+  db_root_password:
+    file: $PWD/docker-data/postgres/db_root_password.txt

@@ -1,0 +1,10 @@
+# { auto_https off }
+
+(common) {
+	header /* {
+		-Server
+	}
+}
+
+import snippets/*
+import sites/*
