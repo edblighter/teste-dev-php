@@ -3,3 +3,4 @@
 html
 .gitconfig
 .composer
+.psql_history

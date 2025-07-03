@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    protected string $table;
+
+    public function __construct()
+    {
+        $this->table = config('lecturize.addresses.table', 'addresses');
+    }
+
+    public function up(): void
+    {
+        Schema::table($this->table, function (Blueprint $table) {
+            $table->string('gender', 1)->nullable()->after('uuid');
+            $table->string('title_before')->nullable()->after('gender');
+            $table->string('title_after')->nullable()->after('title_before');
+
+            $table->string('first_name')->nullable()->after('title_after');
+            $table->string('middle_name')->nullable()->after('first_name');
+            $table->string('last_name')->nullable()->after('middle_name');
+
+            $table->string('company')->nullable()->after('title_after');
+            $table->string('extra')->nullable()->after('company');
+
+            $table->string('vat_id')->nullable()->after('country_id');
+            $table->string('eori_id')->nullable()->after('vat_id');
+            $table->string('contact_phone', 32)->nullable()->after('eori_id');
+            $table->string('contact_email')->nullable()->after('contact_phone');
+            $table->string('billing_email')->nullable()->after('contact_email');
+
+            $table->string('instructions')->nullable()->after('billing_email');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table($this->table, function (Blueprint $table) {
+            $table->dropColumn('gender', 'first_name', 'middle_name', 'last_name', 'title_before', 'title_after', 'company', 'extra', 'vat_id', 'eori_id', 'instructions', 'contact_phone', 'contact_email', 'billing_email');
+        });
+    }
+};

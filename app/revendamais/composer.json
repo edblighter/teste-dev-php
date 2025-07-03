@@ -8,7 +8,11 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "laravellegends/pt-br-validator": "^12.2",
+        "lecturize/laravel-addresses": "dev-master",
+        "predis/predis": "^3.0",
+        "rafaellaurindo/laravel-brasilapi": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
