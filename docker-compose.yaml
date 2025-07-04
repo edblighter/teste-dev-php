@@ -8,12 +8,15 @@ services:
     depends_on:
       - db
       - redis
+    volumes:
+      - ./app:/var/www
   web:
     extends:
       file: $PWD/services/caddy/docker-compose.yml
       service: web
     depends_on:
       - app
+
   db:
     extends:
       file: $PWD/services/postgres/docker-compose.yml
