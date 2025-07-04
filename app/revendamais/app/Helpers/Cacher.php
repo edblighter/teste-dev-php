@@ -18,7 +18,7 @@ class Cacher
     public function getCached($key)
     {
         $cachedData = Cache::store($this->store)->get($key);
-        return $cachedData ? json_decode($cachedData) : null;
+        return $cachedData ? \json_decode($cachedData) : null;
     }
 
     public function removeCached($key)

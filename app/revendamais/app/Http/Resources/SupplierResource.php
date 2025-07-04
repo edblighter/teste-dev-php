@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Carbon\Carbon;
 
 class SupplierResource extends JsonResource
 {
@@ -17,17 +17,17 @@ class SupplierResource extends JsonResource
     {
         //return parent::toArray($request);
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'type' => $this->type,
-            'document' => $this->document,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            "street" => $this->street,
-            "post_code" => $this->post_code ,
-            "state" => $this->state,
-            "city" => $this->city,
-            "country" => $this->country,
+            'id'        => $this->id,
+            'name'      => $this->name,
+            'type'      => $this->type,
+            'document'  => $this->document,
+            'email'     => $this->email,
+            'phone'     => $this->phone,
+            'street'    => $this->street,
+            'post_code' => $this->post_code ,
+            'state'     => $this->state,
+            'city'      => $this->city,
+            'country'   => $this->country,
           //  'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
           //  'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
         ];

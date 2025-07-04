@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExternalSearchRequest;
-use Illuminate\Http\Request;
 use App\Services\Contracts\ExternalSearchServiceInterface;
+use Illuminate\Http\Request;
 use InvalidArgumentException;
 
 class ExternalSearchController extends Controller
@@ -21,7 +21,7 @@ class ExternalSearchController extends Controller
     {
         $data = $request->validated();
         try {
-            $data = $this->externalSearch->searchCNPJ($data["cnpj"]);
+            $data = $this->externalSearch->searchCNPJ($data['cnpj']);
         } catch (InvalidArgumentException $e) {
             return response()->json(['message' => 'CNPJ Invalido!'], 400);
         }

@@ -10,17 +10,17 @@ class SupplierCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => $this->collection,
-            'current_page' => $this->currentPage(),
-            'per_page' => $this->perPage(),
-            'total' => $this->total(),
-            'total_pages' => $this->lastPage(),
-            'from' => $this->firstItem(),
-            'to' => $this->lastItem(),
+            'data'          => $this->collection,
+            'current_page'  => $this->currentPage(),
+            'per_page'      => $this->perPage(),
+            'total'         => $this->total(),
+            'total_pages'   => $this->lastPage(),
+            'from'          => $this->firstItem(),
+            'to'            => $this->lastItem(),
             'next_page_url' => $this->nextPageUrl(),
             'prev_page_url' => $this->previousPageUrl(),
-            'path' => $this->path(),
-            'links' => $this->linkCollection()->toArray()
+            'path'          => $this->path(),
+            'links'         => $this->linkCollection()->toArray(),
         ];
     }
 }

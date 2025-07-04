@@ -24,10 +24,10 @@ class SupplierIndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order' => 'in:asc,desc',
+            'order'    => 'in:asc,desc',
             'per_page' => 'integer|min:1',
-            'page' => 'integer|min:1',
-            'order_by' => 'in:name,email'
+            'page'     => 'integer|min:1',
+            'order_by' => 'in:name,email',
         ];
     }
 
@@ -36,7 +36,7 @@ class SupplierIndexRequest extends FormRequest
         throw new HttpResponseException(response()->json([
           'success'   => false,
           'message'   => 'Validation errors',
-          'data'      => $validator->errors()
-        ],400));
+          'data'      => $validator->errors(),
+        ], 400));
     }
 }

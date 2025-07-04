@@ -2,13 +2,13 @@
 
 namespace Tests\Unit\Services;
 
-use App\Services\ExternalSearchService;
-use App\Services\Contracts\ExternalSearchServiceInterface;
 use App\Helpers\Cacher;
+use App\Services\Contracts\ExternalSearchServiceInterface;
+use App\Services\ExternalSearchService;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
-use RafaelLaurindo\BrasilApi\BrasilApi;
 use LaravelLegends\PtBrValidator\Rules\Cnpj;
+use RafaelLaurindo\BrasilApi\BrasilApi;
 use Tests\TestCase;
 
 class ExternalSearchServiceTest extends TestCase

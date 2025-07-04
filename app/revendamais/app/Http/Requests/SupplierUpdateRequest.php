@@ -24,16 +24,16 @@ class SupplierUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string',
-            'type' => 'sometimes|in:CPF,CNPJ',
-            'document' => 'sometimes|string|cpf_ou_cnpj',
-            'email' => 'sometimes|string|email',
-            'phone' => 'sometimes|string',
-            'street' => 'sometimes|string|max:255',
+            'name'      => 'sometimes|string',
+            'type'      => 'sometimes|in:CPF,CNPJ',
+            'document'  => 'sometimes|string|cpf_ou_cnpj',
+            'email'     => 'sometimes|string|email',
+            'phone'     => 'sometimes|string',
+            'street'    => 'sometimes|string|max:255',
             'post_code' => 'sometimes|string|max:20',
-            'state'  => 'sometimes|string|max:100',
-            'city'  => 'sometimes|string|max:100',
-            'country' => 'sometimes|string',
+            'state'     => 'sometimes|string|max:100',
+            'city'      => 'sometimes|string|max:100',
+            'country'   => 'sometimes|string',
         ];
     }
 
@@ -42,7 +42,7 @@ class SupplierUpdateRequest extends FormRequest
         throw new HttpResponseException(response()->json([
           'success'   => false,
           'message'   => 'Validation errors',
-          'data'      => $validator->errors()
-        ],400));
+          'data'      => $validator->errors(),
+        ], 400));
     }
 }

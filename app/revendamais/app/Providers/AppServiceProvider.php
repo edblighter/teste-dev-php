@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Repositories\Interfaces\SupplierRepositoryInterface;
 use App\Repositories\SupplierRepository;
 use App\Services\Contracts\ExternalSearchServiceInterface;
 use App\Services\ExternalSearchService;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

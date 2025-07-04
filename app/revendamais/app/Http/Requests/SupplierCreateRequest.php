@@ -24,16 +24,16 @@ class SupplierCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'type' => 'required|in:CPF,CNPJ',
-            'document' => 'required|string|cpf_ou_cnpj|unique:suppliers',
-            'email' => 'required|string|email',
-            'phone' => 'required|string',
-            'street' => 'required|string|max:255',
+            'name'      => 'required|string',
+            'type'      => 'required|in:CPF,CNPJ',
+            'document'  => 'required|string|cpf_ou_cnpj|unique:suppliers',
+            'email'     => 'required|string|email',
+            'phone'     => 'required|string',
+            'street'    => 'required|string|max:255',
             'post_code' => 'required|string|max:20',
-            'state' => 'required|string|max:255',
-            'city'  => 'required|string|max:100',
-            'country' => 'required',
+            'state'     => 'required|string|max:255',
+            'city'      => 'required|string|max:100',
+            'country'   => 'required',
         ];
     }
 
@@ -42,7 +42,7 @@ class SupplierCreateRequest extends FormRequest
         throw new HttpResponseException(response()->json([
           'success'   => false,
           'message'   => 'Validation errors',
-          'data'      => $validator->errors()
-        ],400));
+          'data'      => $validator->errors(),
+        ], 400));
     }
 }

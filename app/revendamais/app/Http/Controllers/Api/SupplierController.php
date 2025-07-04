@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Classes\ApiResponseClass;
-use Illuminate\Http\JsonResponse;
-use App\Services\DTO\SupplierDTO;
-use App\Services\SupplierService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupplierCreateRequest;
 use App\Http\Requests\SupplierIndexRequest;
 use App\Http\Requests\SupplierUpdateRequest;
 use App\Http\Resources\SupplierCollection;
 use App\Http\Resources\SupplierResource;
+use App\Services\DTO\SupplierDTO;
+use App\Services\SupplierService;
 use Illuminate\Database\RecordNotFoundException;
+use Illuminate\Http\JsonResponse;
 
 class SupplierController extends Controller
 {
@@ -28,7 +28,7 @@ class SupplierController extends Controller
     public function index(SupplierIndexRequest $request)
     {
         $data = $request->validated();
-        $data = $this->supplierService->getAllSuppliers($data);
+        $data = $this->supplierService->getAll($data);
         return ApiResponseClass::sendResponse(new SupplierCollection($data), '', 200);
     }
 
@@ -37,13 +37,13 @@ class SupplierController extends Controller
      */
     public function store(SupplierCreateRequest $request): JsonResponse
     {
-        $data = $request->validated();
-        $create = $this->supplierService->createSupplier(SupplierDTO::fromArray($data));
+        $data   = $request->validated();
+        $create = $this->supplierService->create(SupplierDTO::fromArray($data));
         return ApiResponseClass::sendResponse(
-                new SupplierResource(SupplierDTO::fromArray($create)),
-                '',
-                201
-            );
+            new SupplierResource(SupplierDTO::fromArray($create)),
+            '',
+            201
+        );
     }
 
     /**
@@ -51,12 +51,12 @@ class SupplierController extends Controller
      */
     public function show($id): JsonResponse
     {
-        try{
-            $data = $this->supplierService->getSupplierById($id);
-        }catch(RecordNotFoundException $e){
-            return ApiResponseClass::sendResponse('','Supplier Not found',404);
+        try {
+            $data = $this->supplierService->getById($id);
+        } catch (RecordNotFoundException $e) {
+            return ApiResponseClass::sendResponse('', 'Supplier Not found', 404);
         }
-        return ApiResponseClass::sendResponse(new SupplierResource(SupplierDTO::fromArray($data)), '',200);
+        return ApiResponseClass::sendResponse(new SupplierResource(SupplierDTO::fromArray($data)), '', 200);
     }
 
     /**
@@ -64,13 +64,13 @@ class SupplierController extends Controller
      */
     public function update(SupplierUpdateRequest $request, $id): JsonResponse
     {
-        try{
-            $data = $request->validated();
-            $action = $this->supplierService->updateSupplier(SupplierDTO::fromArray($data),$id);
-        }catch(RecordNotFoundException $e){
-            return ApiResponseClass::sendResponse('','Supplier Not found',404);
+        try {
+            $data   = $request->validated();
+            $action = $this->supplierService->update(SupplierDTO::fromArray($data), $id);
+        } catch (RecordNotFoundException $e) {
+            return ApiResponseClass::sendResponse('', 'Supplier Not found', 404);
         }
-        return ApiResponseClass::sendResponse(new SupplierResource(SupplierDTO::fromArray($action)), '',200);
+        return ApiResponseClass::sendResponse(new SupplierResource(SupplierDTO::fromArray($action)), '', 200);
     }
 
     /**
@@ -78,15 +78,15 @@ class SupplierController extends Controller
      */
     public function destroy($id): JsonResponse
     {
-        try{
-            $delete = $this->supplierService->deleteSupplier($id);
-            if($delete){
-                return ApiResponseClass::sendResponse('','',204);
-            }else{
-                return ApiResponseClass::sendResponse('','The DELETE operation was not successful',400);
+        try {
+            $delete = $this->supplierService->delete($id);
+            if ($delete) {
+                return ApiResponseClass::sendResponse('', '', 204);
+            } else {
+                return ApiResponseClass::sendResponse('', 'The DELETE operation was not successful', 400);
             }
-        }catch(RecordNotFoundException $e){
-            return ApiResponseClass::sendResponse('','Supplier Not found',404);
+        } catch (RecordNotFoundException $e) {
+            return ApiResponseClass::sendResponse('', 'Supplier Not found', 404);
         }
     }
 }

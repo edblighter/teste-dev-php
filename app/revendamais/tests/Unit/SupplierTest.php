@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
+use App\Models\Supplier;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use Illuminate\Http\Response;
-use App\Models\Supplier;
 
 class SupplierTest extends TestCase
 {
@@ -29,20 +29,20 @@ class SupplierTest extends TestCase
     public function test_get_supplier()
     {
         $supplier = Supplier::factory()->create();
-        $supplier->addAddress(["street" => fake()->streetAddress(),
-            "post_code" => fake()->postcode(),
-            "state" => fake()->state(),
-            "city" => fake()->city() ,
-            "country" => fake()->countryCode()]);
+        $supplier->addAddress(['street' => fake()->streetAddress(),
+            'post_code'                 => fake()->postcode(),
+            'state'                     => fake()->state(),
+            'city'                      => fake()->city() ,
+            'country'                   => fake()->countryCode()]);
 
         $response = $this->getJson("/api/suppliers/{$supplier->id}");
         $response->assertStatus(Response::HTTP_OK)
             ->assertJsonFragment([
-                "name" => $supplier->name,
-                "email" => $supplier->email,
-                "type" => $supplier->type,
-                "document" => $supplier->document,
-                "phone" => $supplier->phone,
+                'name'     => $supplier->name,
+                'email'    => $supplier->email,
+                'type'     => $supplier->type,
+                'document' => $supplier->document,
+                'phone'    => $supplier->phone,
               //  "street" => $supplier->street,
                // "post_code" => $supplier->postcode,
                // "state" => $supplier->state,
@@ -57,23 +57,23 @@ class SupplierTest extends TestCase
     public function test_store_supplier()
     {
         $data = [
-            "name" => "Pessoa 1",
-            "type" => "CPF",
-            "document" => "08061758008",
-            "email" => "supplier@fakedata.com",
-            "phone" => "11999999999",
-            "street" => fake()->streetAddress(),
-            "post_code" => fake()->postcode(),
-            "state" => fake()->state(),
-            "city" => fake()->city() ,
-            "country" => fake()->countryCode()
+            'name'      => 'Pessoa 1',
+            'type'      => 'CPF',
+            'document'  => '08061758008',
+            'email'     => 'supplier@fakedata.com',
+            'phone'     => '11999999999',
+            'street'    => fake()->streetAddress(),
+            'post_code' => fake()->postcode(),
+            'state'     => fake()->state(),
+            'city'      => fake()->city() ,
+            'country'   => fake()->countryCode(),
         ];
         $response = $this->postJson('/api/suppliers', $data);
         $response->assertStatus(Response::HTTP_CREATED)
             ->assertJsonFragment([
-                'name' => 'Pessoa 1',
-                'email' => 'supplier@fakedata.com',
-                'document' => '08061758008'
+                'name'     => 'Pessoa 1',
+                'email'    => 'supplier@fakedata.com',
+                'document' => '08061758008',
             ]);
     }
 
@@ -83,33 +83,33 @@ class SupplierTest extends TestCase
     public function test_update_supplier()
     {
         $supplier = Supplier::factory()->create([
-            "name" => "Pessoa 1",
-            "type" => "CPF",
-            "document" => "08061758008",
-            "email" => "supplier@fakedata.com",
-            "phone" => "11999999999",
+            'name'     => 'Pessoa 1',
+            'type'     => 'CPF',
+            'document' => '08061758008',
+            'email'    => 'supplier@fakedata.com',
+            'phone'    => '11999999999',
         ]);
         $data = [
-            "name" => "Pessoa 1 - UPDATED",
-            "type" => "CPF",
-            "document" => "08061758008",
-            "email" => "supplier_updated@fakedata.com",
-            "phone" => "99999999999",
-            "street" => fake()->streetAddress(),
-            "post_code" => fake()->postcode(),
-            "state" => fake()->state(),
-            "city" => fake()->city() ,
-            "country" => fake()->countryCode()
+            'name'      => 'Pessoa 1 - UPDATED',
+            'type'      => 'CPF',
+            'document'  => '08061758008',
+            'email'     => 'supplier_updated@fakedata.com',
+            'phone'     => '99999999999',
+            'street'    => fake()->streetAddress(),
+            'post_code' => fake()->postcode(),
+            'state'     => fake()->state(),
+            'city'      => fake()->city() ,
+            'country'   => fake()->countryCode(),
         ];
         $response = $this->putJson("/api/suppliers/{$supplier->id}", $data);
         $response->assertStatus(Response::HTTP_OK)
             ->assertJsonFragment([
-                'id' => $supplier->id,
-                "name" => "Pessoa 1 - UPDATED",
-                "type" => "CPF",
-                "document" => "08061758008",
-                "email" => "supplier_updated@fakedata.com",
-                "phone" => "99999999999",
+                'id'       => $supplier->id,
+                'name'     => 'Pessoa 1 - UPDATED',
+                'type'     => 'CPF',
+                'document' => '08061758008',
+                'email'    => 'supplier_updated@fakedata.com',
+                'phone'    => '99999999999',
             ]);
     }
 
@@ -134,7 +134,7 @@ class SupplierTest extends TestCase
 
         $response->assertStatus(Response::HTTP_BAD_REQUEST)
                 ->assertJsonStructure([
-                    "message"
+                    'message',
                 ]);
     }
 }

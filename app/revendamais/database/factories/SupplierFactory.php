@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use APP\Models\Supplier;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -21,11 +21,11 @@ class SupplierFactory extends Factory
         $type = fake()->randomElement(['CPF', 'CNPJ']);
 
         return [
-            'name' => fake()->company,
-            'type' => $type,
-            'email' => fake()->unique()->safeEmail,
+            'name'     => fake()->company,
+            'type'     => $type,
+            'email'    => fake()->unique()->safeEmail,
             'document' => ($type === 'CPF') ? fake('pt_BR')->cpf(false) : fake('pt_BR')->cnpj(false) ,
-            'phone' => fake()->numerify('###########'),
+            'phone'    => fake()->numerify('###########'),
         ];
     }
 }

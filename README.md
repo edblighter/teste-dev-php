@@ -9,3 +9,5 @@ API Restful desenvolvida em Laravel 12 para gerenciamento de fornecedores.
 - PHP 8.4
 - PostgreSQL
 - Adminer
+- Redis
+
