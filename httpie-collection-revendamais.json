@@ -1,0 +1,379 @@
+{
+  "meta": {
+    "format": "httpie",
+    "version": "1.0.0",
+    "contentType": "collection",
+    "schema": "https://schema.httpie.io/1.0.0.json",
+    "docs": "https://httpie.io/r/help/export-from-httpie",
+    "source": "HTTPie Desktop 2025.2.0"
+  },
+  "entry": {
+    "name": "RevendaMais",
+    "icon": {
+      "name": "default",
+      "color": "orange"
+    },
+    "auth": {
+      "type": "none"
+    },
+    "requests": [
+      {
+        "name": "Create — error",
+        "url": "https://revendamais.localhost/api/suppliers",
+        "method": "POST",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": [
+              {
+                "name": "name",
+                "value": "FFPL",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "type",
+                "value": "CPF",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "document",
+                "value": "96082186249",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "email",
+                "value": "fued.felipe@hotmail.com",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "phone",
+                "value": "92984046888",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "street",
+                "value": "Rua A number 5",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "post_code",
+                "value": "69094750",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "city",
+                "value": "Manaus",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "country",
+                "value": "BR",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "state",
+                "value": "Amazonas",
+                "enabled": true,
+                "type": "text"
+              }
+            ]
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "List",
+        "url": "https://revendamais.localhost/api/suppliers",
+        "method": "GET",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "none",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Update",
+        "url": "https://revendamais.localhost/api/suppliers/1",
+        "method": "PATCH",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": [
+              {
+                "name": "name",
+                "value": "FFPL",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "type",
+                "value": "CPF",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "document",
+                "value": "96082186249",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "email",
+                "value": "fued.felipe@hotmail.com",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "phone",
+                "value": "92984046587",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "street",
+                "value": "Rua A number 4",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "post_code",
+                "value": "69094750",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "city",
+                "value": "Manaus",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "country",
+                "value": "BR",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "state",
+                "value": "Amazonas",
+                "enabled": true,
+                "type": "text"
+              }
+            ]
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Delete",
+        "url": "https://revendamais.localhost/api/suppliers/1",
+        "method": "DELETE",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "none",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "byID",
+        "url": "https://revendamais.localhost/api/suppliers/1",
+        "method": "GET",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "none",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Create",
+        "url": "https://revendamais.localhost/api/suppliers",
+        "method": "POST",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "form",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": [
+              {
+                "name": "name",
+                "value": "FFPL",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "type",
+                "value": "CPF",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "document",
+                "value": "96082186249",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "email",
+                "value": "fued.felipe@hotmail.com",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "phone",
+                "value": "92984046888",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "street",
+                "value": "Rua A number 5",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "post_code",
+                "value": "69094750",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "city",
+                "value": "Manaus",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "country",
+                "value": "BR",
+                "enabled": true,
+                "type": "text"
+              },
+              {
+                "name": "state",
+                "value": "Amazonas",
+                "enabled": true,
+                "type": "text"
+              }
+            ]
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      }
+    ]
+  }
+}
