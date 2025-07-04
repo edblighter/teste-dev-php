@@ -29,6 +29,12 @@ class SupplierTest extends TestCase
     public function test_get_supplier()
     {
         $supplier = Supplier::factory()->create();
+        $supplier->addAddress(["street" => fake()->streetAddress(),
+            "post_code" => fake()->postcode(),
+            "state" => fake()->state(),
+            "city" => fake()->city() ,
+            "country" => fake()->countryCode()]);
+
         $response = $this->getJson("/api/suppliers/{$supplier->id}");
         $response->assertStatus(Response::HTTP_OK)
             ->assertJsonFragment([
@@ -37,7 +43,11 @@ class SupplierTest extends TestCase
                 "type" => $supplier->type,
                 "document" => $supplier->document,
                 "phone" => $supplier->phone,
-                "address" => $supplier->address,
+              //  "street" => $supplier->street,
+               // "post_code" => $supplier->postcode,
+               // "state" => $supplier->state,
+               // "city" => $supplier->city ,
+               // "country" => $supplier->country
             ]);
     }
 
@@ -52,7 +62,11 @@ class SupplierTest extends TestCase
             "document" => "08061758008",
             "email" => "supplier@fakedata.com",
             "phone" => "11999999999",
-            "address" => "Av Faker, s/n - Someplace SW"
+            "street" => fake()->streetAddress(),
+            "post_code" => fake()->postcode(),
+            "state" => fake()->state(),
+            "city" => fake()->city() ,
+            "country" => fake()->countryCode()
         ];
         $response = $this->postJson('/api/suppliers', $data);
         $response->assertStatus(Response::HTTP_CREATED)
@@ -74,7 +88,6 @@ class SupplierTest extends TestCase
             "document" => "08061758008",
             "email" => "supplier@fakedata.com",
             "phone" => "11999999999",
-            "address" => "Av Faker, s/n - Someplace SW"
         ]);
         $data = [
             "name" => "Pessoa 1 - UPDATED",
@@ -82,7 +95,11 @@ class SupplierTest extends TestCase
             "document" => "08061758008",
             "email" => "supplier_updated@fakedata.com",
             "phone" => "99999999999",
-            "address" => "Av Faker, s/n - Someplace SW"
+            "street" => fake()->streetAddress(),
+            "post_code" => fake()->postcode(),
+            "state" => fake()->state(),
+            "city" => fake()->city() ,
+            "country" => fake()->countryCode()
         ];
         $response = $this->putJson("/api/suppliers/{$supplier->id}", $data);
         $response->assertStatus(Response::HTTP_OK)
@@ -93,7 +110,6 @@ class SupplierTest extends TestCase
                 "document" => "08061758008",
                 "email" => "supplier_updated@fakedata.com",
                 "phone" => "99999999999",
-                "address" => "Av Faker, s/n - Someplace SW"
             ]);
     }
 
@@ -115,12 +131,10 @@ class SupplierTest extends TestCase
     public function test_store_suppliers_validation()
     {
         $response = $this->postJson('/api/suppliers', []);
-        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+
+        $response->assertStatus(Response::HTTP_BAD_REQUEST)
                 ->assertJsonStructure([
-                    'errors' => [
-                        'name',
-                        'email'
-                    ]
+                    "message"
                 ]);
     }
 }

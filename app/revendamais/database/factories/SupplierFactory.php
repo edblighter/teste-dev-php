@@ -26,7 +26,6 @@ class SupplierFactory extends Factory
             'email' => fake()->unique()->safeEmail,
             'document' => ($type === 'CPF') ? fake('pt_BR')->cpf(false) : fake('pt_BR')->cnpj(false) ,
             'phone' => fake()->numerify('###########'),
-            'address' => fake()->address,
         ];
     }
 }
