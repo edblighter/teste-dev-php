@@ -15,7 +15,6 @@ class SupplierResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        //return parent::toArray($request);
         return [
             'id'        => $this->id,
             'name'      => $this->name,
@@ -28,8 +27,8 @@ class SupplierResource extends JsonResource
             'state'     => $this->state,
             'city'      => $this->city,
             'country'   => $this->country,
-          //  'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
-          //  'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
+            'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
         ];
     }
 }

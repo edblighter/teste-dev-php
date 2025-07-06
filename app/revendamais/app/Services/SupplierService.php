@@ -41,9 +41,9 @@ class SupplierService
      * @param SupplierDTO $data The data to create the supplier with.
      * @return array The created supplier details.
      */
-    public function create(SupplierDTO $data): array
+    public function create(SupplierDTO $dto): array
     {
-        $supplier = $this->supplierRepository->create($data->getBasicData(), $data->getAddress());
+        $supplier = $this->supplierRepository->create($dto->getBasicData(), $dto->getAddress());
         return $supplier;
     }
     /**

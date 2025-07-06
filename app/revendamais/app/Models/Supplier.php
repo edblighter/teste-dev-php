@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Lecturize\Addresses\Traits\HasAddresses;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Supplier
@@ -27,7 +27,6 @@ class Supplier extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use HasAddresses;
 
     protected $table = 'suppliers';
 
@@ -37,4 +36,9 @@ class Supplier extends Model
      * @var array<int, string>
      */
     protected $fillable = ['name', 'type', 'document', 'email', 'phone'];
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class);
+    }
 }

@@ -4,66 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-/**
- * Class CreateAddressesTable
- */
-class CreateAddressesTable extends Migration
-{
-    /**
-     * Table names.
-     *
-     * @var string $table  The main table name for this migration.
-     */
-    protected $table;
-
-    /**
-     * Create a new migration instance.
-     */
-    public function __construct()
+return new class extends Migration {
+    public function up(): void
     {
-        $this->table = config('lecturize.addresses.table', 'addresses');
-    }
-
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create($this->table, function (Blueprint $table) {
-            $table->increments('id');
-
-            $table->string('street', 60)->nullable();
-            $table->string('city', 60)->nullable();
-            $table->string('state', 60)->nullable();
-            $table->string('post_code', 10)->nullable();
-
-            $table->integer('country_id')->nullable()->unsigned()->index();
-
-            $table->string('note')->nullable();
-
-            $table->float('lat', 10, 6)->nullable();
-            $table->float('lng', 10, 6)->nullable();
-
-            $table->nullableMorphs('addressable');
-
-            foreach (config('lecturize.addresses.flags', ['public', 'primary', 'billing', 'shipping']) as $flag) {
-                $table->boolean('is_' . $flag)->default(false)->index();
-            }
-
+        Schema::create('addresses', static function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('supplier_id')->constrained()->cascadeOnDelete();
+            $table->string('street');
+            $table->string('city');
+            $table->string('state')->nullable();
+            $table->string('post_code');
+            $table->string('country');
+            $table->string('address_type')->default('primary');
+            $table->boolean('is_default')->default(true);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists($this->table);
+        Schema::dropIfExists('addresses');
     }
-}
+};

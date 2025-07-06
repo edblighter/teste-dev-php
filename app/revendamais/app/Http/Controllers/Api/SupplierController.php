@@ -40,7 +40,7 @@ class SupplierController extends Controller
         $data   = $request->validated();
         $create = $this->supplierService->create(SupplierDTO::fromArray($data));
         return ApiResponseClass::sendResponse(
-            new SupplierResource(SupplierDTO::fromArray($create)),
+            $create,
             '',
             201
         );
@@ -56,7 +56,7 @@ class SupplierController extends Controller
         } catch (RecordNotFoundException $e) {
             return ApiResponseClass::sendResponse('', 'Supplier Not found', 404);
         }
-        return ApiResponseClass::sendResponse(new SupplierResource(SupplierDTO::fromArray($data)), '', 200);
+        return ApiResponseClass::sendResponse($data, '', 200);
     }
 
     /**
@@ -70,7 +70,7 @@ class SupplierController extends Controller
         } catch (RecordNotFoundException $e) {
             return ApiResponseClass::sendResponse('', 'Supplier Not found', 404);
         }
-        return ApiResponseClass::sendResponse(new SupplierResource(SupplierDTO::fromArray($action)), '', 200);
+        return ApiResponseClass::sendResponse($action, '', 200);
     }
 
     /**

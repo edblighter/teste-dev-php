@@ -11,7 +11,6 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "laravellegends/pt-br-validator": "^12.2",
-        "lecturize/laravel-addresses": "dev-master",
         "predis/predis": "^3.0",
         "rafaellaurindo/laravel-brasilapi": "^1.0"
     },

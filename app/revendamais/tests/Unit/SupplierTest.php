@@ -13,6 +13,7 @@ class SupplierTest extends TestCase
     {
         parent::setUp();
         DB::table('suppliers')->truncate();
+        DB::table('addresses')->truncate();
     }
     /**
      * A basic test example.
@@ -29,7 +30,7 @@ class SupplierTest extends TestCase
     public function test_get_supplier()
     {
         $supplier = Supplier::factory()->create();
-        $supplier->addAddress(['street' => fake()->streetAddress(),
+        $supplier->address()->create(['street' => fake()->streetAddress(),
             'post_code'                 => fake()->postcode(),
             'state'                     => fake()->state(),
             'city'                      => fake()->city() ,
@@ -43,7 +44,7 @@ class SupplierTest extends TestCase
                 'type'     => $supplier->type,
                 'document' => $supplier->document,
                 'phone'    => $supplier->phone,
-              //  "street" => $supplier->street,
+               // "street" => $supplier->street,
                // "post_code" => $supplier->postcode,
                // "state" => $supplier->state,
                // "city" => $supplier->city ,

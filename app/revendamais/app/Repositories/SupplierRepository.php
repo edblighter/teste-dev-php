@@ -24,15 +24,19 @@ class SupplierRepository implements SupplierRepositoryInterface
      */
     private function mergeData(Supplier $supplier): array
     {
-        $addressData  = $supplier->addresses()->first();
-        $addressArray = [
-            'street'    => $addressData->street,
-            'post_code' => $addressData->post_code,
-            'state'     => $addressData->state,
-            'city'      => $addressData->city,
-            'country'   => $addressData->country->iso_3166_2,
-        ];
-        return \array_merge($supplier->toArray(), $addressArray);
+        $addressData  = $supplier->address()->get();
+        if(!empty($addressData[0])){
+            $addressArray = [
+                'street'    => $addressData[0]->street,
+                'post_code' => $addressData[0]->post_code,
+                'state'     => $addressData[0]->state,
+                'city'      => $addressData[0]->city,
+                'country'   => $addressData[0]->country,
+            ];
+            return \array_merge($supplier->toArray(), $addressArray);
+        }else{
+            return $supplier->toArray();
+        }
     }
     /**
      * Retrieves all suppliers.
@@ -42,16 +46,16 @@ class SupplierRepository implements SupplierRepositoryInterface
      */
     public function all(array $data)
     {
-        $supplierList = Supplier::orderBy($data['order_by'] ?? 'name', $data['order'] ?? 'asc')
+        $supplierList = Supplier::with('address')->orderBy($data['order_by'] ?? 'name', $data['order'] ?? 'asc')
         ->paginate(page: $data['page'] ?? 1, perPage: $data['per_page'] ?? 20);
 
         $supplierList->getCollection()->transform(function ($supplier) {
-            $address             = $supplier->addresses()->first();
-            $supplier->street    = $address->street;
-            $supplier->post_code =  $address->post_code;
-            $supplier->city      = $address->city;
-            $supplier->state     = $address->state;
-            $supplier->country   = $address->country->name;
+            $address             = $supplier->address()->get();
+            $supplier->street    = $address[0]->street;
+            $supplier->post_code = $address[0]->post_code;
+            $supplier->city      = $address[0]->city;
+            $supplier->state     = $address[0]->state;
+            $supplier->country   = $address[0]->country;
             return $supplier;
         });
         return $supplierList;
@@ -77,7 +81,6 @@ class SupplierRepository implements SupplierRepositoryInterface
         $supplierData = $this->mergeData($supplier);
         $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($supplierData));
         return $supplierData;
-
     }
 
     /**
@@ -89,12 +92,11 @@ class SupplierRepository implements SupplierRepositoryInterface
     public function create(array $data, array $address): array
     {
         $supplier = Supplier::create($data);
-        $supplier->addAddress($address);
-        $supplier->save();
-        $supplier->refresh();
-        $supplierData = $this->mergeData($supplier);
-        $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($supplierData));
-        return $supplierData;
+        $supplier->address()->create($address);
+        $supplier->fresh();
+        $out = $this->mergeData($supplier);
+        $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($out));
+        return $out;
     }
 
     /**
@@ -107,14 +109,13 @@ class SupplierRepository implements SupplierRepositoryInterface
     public function update(int $id, array $data, array $address): array
     {
         try {
-            $supplier    = Supplier::findOrFail($id);
-            $addressData = $supplier->addresses()->first();
+            $supplier = Supplier::findOrFail($id);
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             throw new RecordNotFoundException("Id:`$id` not found");
         }
         $supplier->update($data);
-        $supplier->updateAddress($addressData, $address);
+        $supplier->address()->update($address);
         $supplier->refresh();
         $supplierData = $this->mergeData($supplier);
         if ($this->cacher->getCached('supplier_' . $supplier->id)) {
