@@ -6,5 +6,25 @@
 	}
 }
 
-import snippets/*
-import sites/*
+revendamais.localhost {
+	import common
+	import ./security
+
+	tls internal
+	# Provide Zstd and Gzip compression
+	encode zstd gzip
+
+	log {
+		# output logs to standard error (console)
+		output stderr
+	}
+
+	# Resolve the root directory for the app
+	root * /srv/revendamais/public
+	
+	# Or serve a PHP site through php-fpm:
+	php_fastcgi app:9000 {
+	root /var/www/revendamais/public
+	}
+	file_server
+}

@@ -16,17 +16,12 @@ services:
       service: web
     depends_on:
       - app
-
+    volumes:
+      - ./app:/srv
   db:
     extends:
       file: $PWD/services/postgres/docker-compose.yml
       service: db
-  dbadmin:
-    extends:
-      file: $PWD/services/postgres/docker-compose.yml
-      service: dbadmin
-    depends_on:
-      - db
   redis:
     extends:
       file: $PWD/services/redis/docker-compose.yml

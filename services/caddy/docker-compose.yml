@@ -35,7 +35,6 @@ services:
       - $PWD/services/caddy/conf/sites/:/etc/caddy/sites/
       - $PWD/services/caddy/conf/snippets/:/etc/caddy/snippets/
       - $PWD/services/caddy/conf/security.conf:/etc/caddy/security
-      - app_volume:/srv
       - $PWD/docker-data/caddy/data:/data
       - $PWD/docker-data/caddy/config:/config
     networks:

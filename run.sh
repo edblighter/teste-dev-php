@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-sudo PWD=${PWD} docker compose up -d --build
-sudo docker exec -it app_php compose install --working-dir=/var/www/revendamais
-sudo docker exec -it app_php cp revendamais/.env.example revendamais/.env
-sudo docker exec -it app_php php revendamais/artisan key:generate
-sudo docker exec -it app_php php revendamais/artisan migrate:fresh --seed
+PWD=${PWD} docker compose up -d --build
+docker exec -it app_php sh -c "composer install --working-dir=/var/www/revendamais"
+docker exec -it app_php sh -c "cp revendamais/.env.example revendamais/.env"
+docker exec -it app_php sh -c "php revendamais/artisan key:generate"
+docker exec -it app_php sh -c "php revendamais/artisan migrate:fresh --seed"

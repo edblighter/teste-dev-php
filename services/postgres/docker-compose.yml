@@ -48,12 +48,6 @@ services:
       #- $PWD/docker-data/postgres/logs:/tmp/logs   # TODO: Expose the logs(First attempt run in permission issues)
     networks:
       - ${APP_NETWORK_NAME:-app_network}
-  dbadmin:
-    extends:
-      file: $PWD/services/adminer/docker-compose.yml
-      service: dbadmin
-    depends_on:
-      - db
 secrets:
   db_root_password:
     file: $PWD/docker-data/postgres/db_root_password.txt
