@@ -62,7 +62,7 @@ class SupplierRepository implements SupplierRepositoryInterface
      *
      * @param int $id The ID of the supplier to find.
      */
-    public function find($id): array
+    public function find(int $id): array
     {
         $cachedData = $this->cacher->getCached('supplier_' . $id);
 
@@ -129,7 +129,7 @@ class SupplierRepository implements SupplierRepositoryInterface
      *
      * @param int $id The ID of the supplier to delete.
      */
-    public function delete($id): bool
+    public function delete(int $id): bool
     {
         try {
             $supplier = Supplier::findOrFail($id);

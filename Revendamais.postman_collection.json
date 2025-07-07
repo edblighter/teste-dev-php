@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "bad8d930-e7cc-4dce-a43f-d1d8727cb71a",
+		"name": "Revendamais",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5414316"
+	},
+	"item": [
+		{
+			"name": "Listagem",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://revendamais.localhost/api/suppliers?order=asc&order_by=name&per_page=5&page=1",
+					"protocol": "https",
+					"host": [
+						"revendamais",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"suppliers"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "asc"
+						},
+						{
+							"key": "order_by",
+							"value": "name"
+						},
+						{
+							"key": "per_page",
+							"value": "5"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "FFPL2",
+							"description": "\n",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "CPF",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"value": "96082186249",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mail.ffpl@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "92984046888",
+							"type": "text"
+						},
+						{
+							"key": "street",
+							"value": "Rua D, 5",
+							"type": "text"
+						},
+						{
+							"key": "post_code",
+							"value": "69094750",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Manaus",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "BR",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "Amazonas",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://revendamais.localhost/api/suppliers",
+					"protocol": "https",
+					"host": [
+						"revendamais",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"suppliers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "FFPL2",
+							"description": "\n",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "CPF",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"value": "96082186249",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mail.ffpl@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "92984046888",
+							"type": "text"
+						},
+						{
+							"key": "street",
+							"value": "Rua D, 5",
+							"type": "text"
+						},
+						{
+							"key": "post_code",
+							"value": "69094750",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Manaus",
+							"type": "text"
+						},
+						{
+							"key": "country",
+							"value": "BR",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "Amazonas",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://revendamais.localhost/api/suppliers/3",
+					"protocol": "https",
+					"host": [
+						"revendamais",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"suppliers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET fornecedor",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://revendamais.localhost/api/suppliers/3",
+					"protocol": "https",
+					"host": [
+						"revendamais",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"suppliers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://revendamais.localhost/api/suppliers/3",
+					"protocol": "https",
+					"host": [
+						"revendamais",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"suppliers",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca CNPJ",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://revendamais.localhost/api/externalsearch/41724783000133",
+					"protocol": "https",
+					"host": [
+						"revendamais",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"externalsearch",
+						"41724783000133"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

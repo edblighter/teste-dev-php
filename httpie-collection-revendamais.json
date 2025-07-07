@@ -42,7 +42,7 @@
               {
                 "name": "name",
                 "value": "FFPL",
-                "enabled": true,
+                "enabled": false,
                 "type": "text"
               },
               {
@@ -112,7 +112,28 @@
         "url": "https://revendamais.localhost/api/suppliers",
         "method": "GET",
         "headers": [],
-        "queryParams": [],
+        "queryParams": [
+          {
+            "name": "order",
+            "value": "asc",
+            "enabled": true
+          },
+          {
+            "name": "order_by",
+            "value": "name",
+            "enabled": true
+          },
+          {
+            "name": "per_page",
+            "value": "5",
+            "enabled": true
+          },
+          {
+            "name": "page",
+            "value": "1",
+            "enabled": true
+          }
+        ],
         "pathParams": [],
         "auth": {
           "type": "inherited"
@@ -160,7 +181,7 @@
             "fields": [
               {
                 "name": "name",
-                "value": "FFPL",
+                "value": "FFPL - update3",
                 "enabled": true,
                 "type": "text"
               },
@@ -184,7 +205,7 @@
               },
               {
                 "name": "phone",
-                "value": "92984046587",
+                "value": "92984046584",
                 "enabled": true,
                 "type": "text"
               },
@@ -208,7 +229,7 @@
               },
               {
                 "name": "country",
-                "value": "BR",
+                "value": "BRA",
                 "enabled": true,
                 "type": "text"
               },
@@ -257,7 +278,7 @@
       },
       {
         "name": "byID",
-        "url": "https://revendamais.localhost/api/suppliers/1",
+        "url": "https://revendamais.localhost/api/suppliers/2",
         "method": "GET",
         "headers": [],
         "queryParams": [],
@@ -367,6 +388,35 @@
                 "type": "text"
               }
             ]
+          },
+          "graphql": {
+            "query": "",
+            "variables": ""
+          }
+        }
+      },
+      {
+        "name": "Busca CNPJ",
+        "url": "https://revendamais.localhost/api/externalsearch/41724783000133",
+        "method": "GET",
+        "headers": [],
+        "queryParams": [],
+        "pathParams": [],
+        "auth": {
+          "type": "inherited"
+        },
+        "body": {
+          "type": "none",
+          "file": {
+            "name": ""
+          },
+          "text": {
+            "value": "",
+            "format": "application/json"
+          },
+          "form": {
+            "isMultipart": false,
+            "fields": []
           },
           "graphql": {
             "query": "",

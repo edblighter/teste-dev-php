@@ -49,7 +49,7 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         try {
             $data = $this->supplierService->getById($id);
@@ -76,7 +76,7 @@ class SupplierController extends Controller
     /**
      * Delete the specified resource.
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         try {
             $delete = $this->supplierService->delete($id);

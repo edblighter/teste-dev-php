@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use App\Models\Supplier;
 use Illuminate\Http\Response;
@@ -43,11 +43,7 @@ class SupplierTest extends TestCase
                 'type'     => $supplier->type,
                 'document' => $supplier->document,
                 'phone'    => $supplier->phone,
-              //  "street" => $supplier->street,
-               // "post_code" => $supplier->postcode,
-               // "state" => $supplier->state,
-               // "city" => $supplier->city ,
-               // "country" => $supplier->country
+
             ]);
     }
 

@@ -28,7 +28,7 @@ class ExternalSearchService implements ExternalSearchServiceInterface
      *
      * @param string $cnpj The CNPJ to search for.
      */
-    public function searchCNPJ($cnpj): array
+    public function searchCNPJ(string $cnpj): array
     {
         $cachedData = $this->cacher->getCached('search_' . $cnpj);
         if ($cachedData) {
