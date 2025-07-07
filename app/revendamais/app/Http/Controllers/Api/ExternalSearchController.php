@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExternalSearchRequest;
 use App\Services\Contracts\ExternalSearchServiceInterface;
-use Illuminate\Http\Request;
 use InvalidArgumentException;
 
 class ExternalSearchController extends Controller

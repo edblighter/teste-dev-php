@@ -7,12 +7,13 @@ use App\Services\DTO\SupplierDTO;
 use Illuminate\Database\RecordNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Supplier;
+use App\Services\Contracts\SupplierServiceInterface;
 /**
  * SupplierService Class.
  *
  * Provides methods to manage suppliers in the application.
  */
-class SupplierService
+class SupplierService implements SupplierServiceInterface
 {
     protected $supplierRepository;
     /**

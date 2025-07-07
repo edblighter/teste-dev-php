@@ -6,7 +6,7 @@ use App\Helpers\Cacher;
 use App\Models\Address;
 use App\Models\Supplier;
 use App\Repositories\Interfaces\SupplierRepositoryInterface;
-use App\Services\DTO\SupplierDTO;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\RecordNotFoundException;
 
 class SupplierRepository implements SupplierRepositoryInterface
@@ -24,7 +24,7 @@ class SupplierRepository implements SupplierRepositoryInterface
      * @param array $data The fields to filter by in the supplier data.
      * @return LengthAwarePaginator A paginated list of suppliers.
      */
-    public function all(array $data)
+    public function all(array $data): LengthAwarePaginator
     {
         $supplierList = Supplier::with('address')->orderBy($data['order_by'] ?? 'name', $data['order'] ?? 'asc')
         ->paginate(page: $data['page'] ?? 1, perPage: $data['per_page'] ?? 20);
@@ -37,7 +37,7 @@ class SupplierRepository implements SupplierRepositoryInterface
      *
      * @param int $id The ID of the supplier to find.
      */
-    public function find($id): Supplier
+    public function find(int $id): Supplier
     {
         $cachedData = $this->cacher->getCached('supplier_' . $id);
 
@@ -111,7 +111,7 @@ class SupplierRepository implements SupplierRepositoryInterface
      *
      * @param int $id The ID of the supplier to delete.
      */
-    public function delete($id): bool
+    public function delete(int $id): bool
     {
         try {
             $supplier = Supplier::findOrFail($id);
