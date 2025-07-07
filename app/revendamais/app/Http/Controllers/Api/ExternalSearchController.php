@@ -22,6 +22,8 @@ class ExternalSearchController extends Controller
         $data = $request->validated();
         try {
             $data = $this->externalSearch->searchCNPJ($data['cnpj']);
+        }catch(\Illuminate\Http\Client\ConnectionException $e){
+            return response()->json(['message' => 'API Offline!'], 500);
         } catch (InvalidArgumentException $e) {
             return response()->json(['message' => 'CNPJ Invalido!'], 400);
         }

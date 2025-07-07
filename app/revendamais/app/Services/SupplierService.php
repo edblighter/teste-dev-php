@@ -6,7 +6,7 @@ use App\Repositories\Interfaces\SupplierRepositoryInterface;
 use App\Services\DTO\SupplierDTO;
 use Illuminate\Database\RecordNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use App\Models\Supplier;
 /**
  * SupplierService Class.
  *
@@ -41,7 +41,7 @@ class SupplierService
      * @param SupplierDTO $data The data to create the supplier with.
      * @return array The created supplier details.
      */
-    public function create(SupplierDTO $dto): array
+    public function create(SupplierDTO $dto): Supplier
     {
         $supplier = $this->supplierRepository->create($dto->getBasicData(), $dto->getAddress());
         return $supplier;
@@ -52,7 +52,7 @@ class SupplierService
      * @param int $id The ID of the supplier to retrieve.
      * @return array The supplier details with its address.
      */
-    public function getById(int $id): array
+    public function getById(int $id): Supplier
     {
         try {
             return $this->supplierRepository->find($id);
@@ -67,7 +67,7 @@ class SupplierService
      * @param int $id The ID of the supplier to update.
      * @return array The updated supplier details.
      */
-    public function update(SupplierDTO $data, int $id): array
+    public function update(SupplierDTO $data, int $id): Supplier
     {
         try {
             $updatedData = $this->supplierRepository->update($id, $data->getBasicData(), $data->getAddress());

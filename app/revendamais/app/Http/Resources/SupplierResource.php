@@ -22,11 +22,7 @@ class SupplierResource extends JsonResource
             'document'  => $this->document,
             'email'     => $this->email,
             'phone'     => $this->phone,
-            'street'    => $this->street,
-            'post_code' => $this->post_code ,
-            'state'     => $this->state,
-            'city'      => $this->city,
-            'country'   => $this->country,
+            'address'   => new AddressResource($this->whenLoaded('address')),
             'created_at' => Carbon::parse($this->created_at)->format('d/m/Y H:i:s'),
             'updated_at' => Carbon::parse($this->updated_at)->format('d/m/Y H:i:s'),
         ];

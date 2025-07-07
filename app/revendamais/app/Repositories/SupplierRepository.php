@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Helpers\Cacher;
+use App\Models\Address;
 use App\Models\Supplier;
 use App\Repositories\Interfaces\SupplierRepositoryInterface;
+use App\Services\DTO\SupplierDTO;
 use Illuminate\Database\RecordNotFoundException;
 
 class SupplierRepository implements SupplierRepositoryInterface
@@ -17,28 +19,6 @@ class SupplierRepository implements SupplierRepositoryInterface
     }
 
     /**
-     * Merges data from a supplier object into its array representation.
-     *
-     * @param Supplier $supplier The supplier object to merge data from.
-     * @return array The merged data with added address information.
-     */
-    private function mergeData(Supplier $supplier): array
-    {
-        $addressData  = $supplier->address()->get();
-        if(!empty($addressData[0])){
-            $addressArray = [
-                'street'    => $addressData[0]->street,
-                'post_code' => $addressData[0]->post_code,
-                'state'     => $addressData[0]->state,
-                'city'      => $addressData[0]->city,
-                'country'   => $addressData[0]->country,
-            ];
-            return \array_merge($supplier->toArray(), $addressArray);
-        }else{
-            return $supplier->toArray();
-        }
-    }
-    /**
      * Retrieves all suppliers.
      *
      * @param array $data The fields to filter by in the supplier data.
@@ -49,15 +29,6 @@ class SupplierRepository implements SupplierRepositoryInterface
         $supplierList = Supplier::with('address')->orderBy($data['order_by'] ?? 'name', $data['order'] ?? 'asc')
         ->paginate(page: $data['page'] ?? 1, perPage: $data['per_page'] ?? 20);
 
-        $supplierList->getCollection()->transform(function ($supplier) {
-            $address             = $supplier->address()->get();
-            $supplier->street    = $address[0]->street;
-            $supplier->post_code = $address[0]->post_code;
-            $supplier->city      = $address[0]->city;
-            $supplier->state     = $address[0]->state;
-            $supplier->country   = $address[0]->country;
-            return $supplier;
-        });
         return $supplierList;
     }
 
@@ -66,21 +37,30 @@ class SupplierRepository implements SupplierRepositoryInterface
      *
      * @param int $id The ID of the supplier to find.
      */
-    public function find($id): array
+    public function find($id): Supplier
     {
         $cachedData = $this->cacher->getCached('supplier_' . $id);
 
         if ($cachedData) {
-            return (array) $cachedData;
+            $supplier = new Supplier((array)$cachedData);
+            $supplier->exists = true;
+            $supplier->id = $cachedData->id;
+            if(isset($cachedData->address)){
+                $supplier->setRelation('address',new Address((array)$cachedData->address));
+                $supplier->address->id = $cachedData->address->id;
+                $supplier->address->created_at = $cachedData->address->created_at;
+                $supplier->address->updated_at = $cachedData->address->updated_at;
+            }
+            return $supplier;
         }
         try {
-            $supplier = Supplier::findOrFail($id);
+            $supplier = Supplier::with('address')->findOrFail($id);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             throw new RecordNotFoundException("Id:`$id` not found");
         }
-        $supplierData = $this->mergeData($supplier);
-        $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($supplierData));
-        return $supplierData;
+
+        $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($supplier->toArray()));
+        return $supplier;
     }
 
     /**
@@ -89,12 +69,13 @@ class SupplierRepository implements SupplierRepositoryInterface
      * @param array $data The data to create the supplier with.
      * @param array $address The address data for the supplier.
      */
-    public function create(array $data, array $address): array
+    public function create(array $data, array $address): Supplier
     {
         $supplier = Supplier::create($data);
         $supplier->address()->create($address);
         $supplier->fresh();
-        $out = $this->mergeData($supplier);
+        $out = $supplier->load('address');
+        //$out = $this->mergeData($supplier);
         $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($out));
         return $out;
     }
@@ -106,10 +87,10 @@ class SupplierRepository implements SupplierRepositoryInterface
      * @param array $data The data to update the supplier with.
      * @param array $address The address data for the supplier.
      */
-    public function update(int $id, array $data, array $address): array
+    public function update(int $id, array $data, array $address): Supplier
     {
         try {
-            $supplier = Supplier::findOrFail($id);
+            $supplier = Supplier::with('address')->findOrFail($id);
 
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             throw new RecordNotFoundException("Id:`$id` not found");
@@ -117,12 +98,12 @@ class SupplierRepository implements SupplierRepositoryInterface
         $supplier->update($data);
         $supplier->address()->update($address);
         $supplier->refresh();
-        $supplierData = $this->mergeData($supplier);
+        $supplier->load('address');
         if ($this->cacher->getCached('supplier_' . $supplier->id)) {
             $this->cacher->removeCached('supplier_' . $supplier->id);
         }
-        $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($supplierData));
-        return $supplierData;
+        $this->cacher->setCached('supplier_' . $supplier->id, \json_encode($supplier));
+        return $supplier;
     }
 
     /**

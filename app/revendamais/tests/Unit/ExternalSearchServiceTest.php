@@ -23,6 +23,4 @@ class ExternalSearchServiceTest extends TestCase
         $this->expectExceptionMessage('CNPJ Invalido!');
         $service->searchCNPJ('12345678900');
     }
-
-
 }

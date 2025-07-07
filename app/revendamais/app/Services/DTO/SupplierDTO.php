@@ -17,18 +17,8 @@ class SupplierDTO
         public string $document,
         public string $email,
         public string $phone,
-        public array $address
-        /* public string $street,
-        public string $post_code,
-        public string $state,
-        public string $city,
-        public string $country, */
+        public AddressDataDTO $address
     ) {
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function getBasicData(): array
@@ -44,7 +34,7 @@ class SupplierDTO
 
     public function getAddress()
     {
-        return $this->address;
+        return $this->address->toArray();
     }
 
     public function toArray()
@@ -62,7 +52,7 @@ class SupplierDTO
             $data['document'],
             $data['email'],
             $data['phone'],
-            $address
+            AddressDataDTO::fromArray($address)
         );
     }
 
@@ -75,14 +65,14 @@ class SupplierDTO
             $request->document,
             $request->email,
             $request->phone,
-            ['address'=>
+            AddressDataDTO::fromArray(
                 ['street' =>$request->street,
                 'post_code'=>$request->post_code,
                 'state'=>$request->state,
                 'city'=>$request->city,
                 'country'=>$request->country
                 ]
-            ]
+            )
         ));
     }
 
